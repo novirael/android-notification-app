@@ -1,4 +1,6 @@
 Cython==0.20
 Kivy==1.9.0
+MarkupSafe==0.23
+buildozer==0.27
 pygame==1.9.2a0
 wsgiref==0.1.2
