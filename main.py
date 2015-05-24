@@ -1,6 +1,6 @@
+from api.endpoints import AllegroEndpoints
 from credentials import API_KEY, LOGIN, PASSWORD
-from webapi import AllegroWebAPI
 
 
 if __name__ == '__main__':
-    AllegroWebAPI(API_KEY, LOGIN, PASSWORD)
+    api = AllegroEndpoints(API_KEY, LOGIN, PASSWORD)
