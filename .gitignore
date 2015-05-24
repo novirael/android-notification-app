@@ -75,3 +75,6 @@ docs/_build/
 
 # Buldozer files
 .buildozer/
+
+# Don't update credentials
+credentials.py
