@@ -28,7 +28,7 @@ class AllegroWebAPI(object):
                 webapiKey=self.api_key
             )
         except suds.WebFault:
-            logger.info("Cannot get version component")
+            logger.debug("Cannot get version component")
             return
 
         for row in version_component.item:
@@ -40,13 +40,17 @@ class AllegroWebAPI(object):
         """
         Authenticates using encrypted password.
         """
-        self.session_id = self.service.doLoginEnc(
-            userLogin=self.login,
-            userHashPassword=self.enc_passwd,
-            countryCode=self.country_code,
-            webapiKey=self.api_key,
-            localVersion=self.versions[self.country_id]
-        ).sessionHandlePart
+        try:
+            self.session_id = self.service.doLoginEnc(
+                userLogin=self.login,
+                userHashPassword=self.enc_passwd,
+                countryCode=self.country_code,
+                webapiKey=self.api_key,
+                localVersion=self.versions[self.country_id]
+            ).sessionHandlePart
+        except suds.WebFault:
+            self.session_id = None
+            logger.debug("Cannot login")
 
     def __getattr__(self, name):
         return self._api_method(getattr(self.service, name))
