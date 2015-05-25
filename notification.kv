@@ -1,0 +1,22 @@
+<BaseLayout>:
+    orientation: "vertical"
+
+    ItemsWidget:
+        orientation: "vertical"
+
+    MenuWidget:
+        orientation: "horizontal"
+        size_hint: 1, 0.1
+
+        Button:
+            text: "Home"
+            on_press: self.parent.load_home()
+        Button:
+            text: "Categories"
+            on_press: self.parent.load_categories()
+        Button:
+            text: "Favourites"
+            on_press: self.parent.load_favourites()
+        Button:
+            text: "Settings"
+            on_press: self.parent.load_settings()
