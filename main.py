@@ -1,6 +1,8 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
+from kivy.uix.button import Button
+from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from api.endpoints import AllegroEndpoints
@@ -14,7 +16,25 @@ class BaseLayout(BoxLayout):
 
 
 class ItemsWidget(BoxLayout):
-    pass
+    def __init__(self, **kwargs):
+        super(ItemsWidget, self).__init__(**kwargs)
+        self.api = AllegroEndpoints(API_KEY, LOGIN, PASSWORD)
+        self._load_newest_items()
+
+    def refresh(self):
+        self.clear_widgets()
+        self._load_newest_items()
+        self._create_refresh_btn()
+
+    def _load_newest_items(self):
+        for item in self.api.get_all_car_items()[:10]:
+            self.add_widget(Label(text=item['name']))
+
+    def _create_refresh_btn(self):
+        pass
+        # Todo doesn't work
+        # button = Button(text="Refresh!", on_press=self.refresh())
+        # self.add_widget(button)
 
 
 class MenuWidget(BoxLayout):
@@ -83,5 +103,4 @@ class NotificationApp(App):
 
 
 if __name__ == '__main__':
-    api = AllegroEndpoints(API_KEY, LOGIN, PASSWORD)
     NotificationApp().run()
