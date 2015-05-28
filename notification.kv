@@ -21,12 +21,24 @@
 
 
 <ItemsScreen>:
-    ItemsWidget:
+    BoxLayout:
         orientation: "vertical"
 
-        Button:
-            text: "Refresh"
-            on_press: self.parent.refresh()
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, 0.05
+
+            Label:
+                text: "Items"
+
+            Button:
+                text: "Refresh"
+                on_press: root.refresh_items()
+
+        ItemsWidget:
+            orientation: "vertical"
+            size_hint: 1, 0.95
+
 
 
 <CategoriesScreen>:

@@ -16,25 +16,26 @@ class BaseLayout(BoxLayout):
 
 
 class ItemsWidget(BoxLayout):
+    items = []
+
     def __init__(self, **kwargs):
         super(ItemsWidget, self).__init__(**kwargs)
         self.api = AllegroEndpoints(API_KEY, LOGIN, PASSWORD)
         self._load_newest_items()
 
     def refresh(self):
-        self.clear_widgets()
+        self._remove_item_widgets()
         self._load_newest_items()
-        self._create_refresh_btn()
 
     def _load_newest_items(self):
         for item in self.api.get_all_car_items()[:10]:
-            self.add_widget(Label(text=item['name']))
+            item = Label(text=item['name'])
+            self.items.append(item)
+            self.add_widget(item)
 
-    def _create_refresh_btn(self):
-        pass
-        # Todo doesn't work
-        # button = Button(text="Refresh!", on_press=self.refresh())
-        # self.add_widget(button)
+    def _remove_item_widgets(self):
+        for item in self.items:
+            self.remove_widget(item)
 
 
 class MenuWidget(BoxLayout):
@@ -61,7 +62,9 @@ class MenuWidget(BoxLayout):
 
 
 class ItemsScreen(Screen):
-    pass
+    def refresh_items(self):
+        # Refresh ItemWidget
+        self.children[0].children[0].refresh()
 
 
 class CategoriesScreen(Screen):
