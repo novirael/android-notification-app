@@ -1,22 +1,52 @@
 <BaseLayout>:
     orientation: "vertical"
 
+
+<MenuWidget>:
+    orientation: "horizontal"
+    size_hint: 1, 0.1
+
+    Button:
+        text: "Home"
+        on_press: self.parent.load_home()
+    Button:
+        text: "Categories"
+        on_press: self.parent.load_categories()
+    Button:
+        text: "Favourites"
+        on_press: self.parent.load_favourites()
+    Button:
+        text: "Settings"
+        on_press: self.parent.load_settings()
+
+
+<ItemsScreen>:
     ItemsWidget:
         orientation: "vertical"
 
-    MenuWidget:
-        orientation: "horizontal"
-        size_hint: 1, 0.1
+        Button:
+            text: "Items"
+
+
+<CategoriesScreen>:
+    BoxLayout:
+        orientation: "vertical"
 
         Button:
-            text: "Home"
-            on_press: self.parent.load_home()
-        Button:
             text: "Categories"
-            on_press: self.parent.load_categories()
+
+
+<FavouritesScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
         Button:
             text: "Favourites"
-            on_press: self.parent.load_favourites()
+
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
         Button:
             text: "Settings"
-            on_press: self.parent.load_settings()
